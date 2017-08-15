@@ -3,9 +3,15 @@ const set = require('./settings');
 module.exports = {
 
   development: {
-    client: 'sqlite3',
+    client: 'pg',
+    
     connection: {
-      filename: './dev.sqlite3'
+      host : settings.hostname,
+      port : settings.port,
+      ssl : settings.ssl,
+      user : settings.user,
+      password : settings.password,
+      database : settings.database,
     }
   },
 
