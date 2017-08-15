@@ -20,17 +20,16 @@ client.connect((err) => {
   if (err) {
     return console.error('Connection Error', err);
   }
-  client.query('SELECT * FROM famous_people WHERE first_name LIKE $1 OR last_name LIKE $1;', [process.argv[2]], (err, result) => {
-    if (err) {
-      return console.error('error running query', err);
-    }
-    if (result.rows.length > 0) {
-      printPerson(result.rows);
-    } else {
-      console.log(`No person by name '${process.argv[2]}' could be found`);
-    }
-    client.end();
-  });
+  client.query('SELECT * FROM famous_people WHERE first_name LIKE $1 OR last_name LIKE $1;', [process.argv[2]])
+    .then((result) => {
+      if (result.rows.length > 0) {
+        printPerson(result.rows);
+      } else {
+        console.log(`No person by name '${process.argv[2]}' could be found`);
+      }
+      client.end();
+    })
+    .catch((err) => console.error('error running query', err));
 });
 
 
