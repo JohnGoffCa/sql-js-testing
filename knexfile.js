@@ -1,4 +1,4 @@
-const set = require('./settings');
+const settings = require('./settings');
 
 module.exports = {
 
